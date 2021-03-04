@@ -1,0 +1,53 @@
+﻿@inject Notifications notifications
+
+@code{
+    [Parameter]
+    public Product CurrentProduct { get; set; }
+    [Parameter]
+    public string Text { get; set; }
+}
+
+<RadzenButton ButtonStyle="ButtonStyle.Secondary" Text="Save" Click="OnSave"/>
+
+<RadzenHtmlEditor @bind-Value=@Text style="height: 500px; margin-bottom: 1rem;" Change="OnChange" @ref="editor">
+    <RadzenHtmlEditorUndo />
+    <RadzenHtmlEditorRedo />
+    <RadzenHtmlEditorSeparator />
+    <RadzenHtmlEditorFontSize />
+    <RadzenHtmlEditorSeparator />
+    <RadzenHtmlEditorAlignLeft />
+    <RadzenHtmlEditorAlignCenter />
+    <RadzenHtmlEditorAlignRight />
+    <RadzenHtmlEditorSeparator />
+    <RadzenHtmlEditorBold />
+    <RadzenHtmlEditorItalic />
+    <RadzenHtmlEditorUnderline />
+    <RadzenHtmlEditorStrikeThrough />
+    <RadzenHtmlEditorSeparator />
+    <RadzenHtmlEditorColor />
+    <RadzenHtmlEditorBackground />
+    <RadzenHtmlEditorRemoveFormat />
+</RadzenHtmlEditor>
+
+<br />
+<br />
+<br />
+<div style="margin:30px;">
+    @Text
+</div>
+
+@code{
+    RadzenHtmlEditor editor;
+
+    public void OnSave()
+    {
+        editor.ExecuteCommandAsync(HtmlEditorCommands.Undo);
+        editor.ExecuteCommandAsync(HtmlEditorCommands.Redo);
+    }
+
+    public void OnChange(string text)
+    {
+        CurrentProduct.Description = text;
+        notifications.Success("Saved");
+    }
+}

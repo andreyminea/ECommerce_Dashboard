@@ -1,0 +1,57 @@
+﻿@*
+    First button returns current text in the text Box and the modified text
+    Second button return the initial text
+*@
+
+@code {
+    public delegate void CustomEventHandler(string val1, string val2);
+    [Parameter]
+    public CustomEventHandler OnFirst { get; set; }
+    [Parameter]
+    public EventCallback<string> OnSecond { get; set; }
+    [Parameter]
+    public string Text { get; set; }
+    [Parameter]
+    public string Icon1 { get; set; }
+    [Parameter]
+    public string Icon2 { get; set; }
+    [Parameter]
+    public ButtonStyle Style1 { get; set; }
+    [Parameter]
+    public ButtonStyle Style2 { get; set; }
+}
+
+<div class="row">
+    <RadzenTextBox Value=@Text @oninput=@(args => OnChange(args.Value.ToString())) />
+    <div style="width:10px;" />
+    <RadzenButton Click=@(args => OnFirstButtonPressed()) Icon=@Icon1 ButtonStyle="@Style1" Style="margin-bottom: 20px; width: 40px" />
+    <div style="width:10px;" />
+    <RadzenButton Click=@(args => OnSecondButtonPressed()) Icon=@Icon2 ButtonStyle="@Style2" Style="margin-bottom: 20px; width: 40px" />
+</div>
+
+@code{
+    private string textBoxText;
+
+    private void OnFirstButtonPressed()
+    {
+        if (Text != null)
+            if (Text.Length > 0)
+            {
+                OnFirst.Invoke(textBoxText, Text);
+            }
+    }
+
+    private void OnSecondButtonPressed()
+    {
+        if (Text != null)
+            if (Text.Length > 0)
+            {
+                OnSecond.InvokeAsync(Text);
+            }
+    }
+
+    private void OnChange(string args)
+    {
+        textBoxText = args;
+    }
+}

@@ -1,0 +1,41 @@
+﻿@using System.Diagnostics
+
+@code {
+    string name;
+    [Parameter]
+    public EventCallback<string> OnAdd { get; set; }
+    [Parameter]
+    public string Placeholder { get; set; }
+}
+
+<div class="row" style="margin: auto;">
+    <RadzenTextBox Placeholder=@Placeholder @oninput=@(args => OnChange(args.Value.ToString())) @ref="textBox" />
+    <div style="width: 10px;"></div>
+    <RadzenButton Click=@(args => OnClick()) Icon="add" Style="width: 60px" />
+</div>
+
+
+@code{
+    RadzenTextBox textBox;
+
+    public void Reset()
+    {
+        name = "";
+        textBox.Value = "";
+        this.StateHasChanged();
+    }
+
+    private void OnClick()
+    {
+        if (name != null)
+            if (name.Length > 0)
+            {
+                OnAdd.InvokeAsync(name);
+            }
+    }
+
+    private void OnChange(string text)
+    {
+        name = text;
+    }
+}

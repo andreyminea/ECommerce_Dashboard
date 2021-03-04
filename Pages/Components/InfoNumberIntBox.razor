@@ -1,0 +1,15 @@
+﻿@code{
+    [Parameter]
+    public string Text { get; set; }
+    [Parameter]
+    public int Min { get; set; }
+    [Parameter]
+    public EventCallback<int> OnValueEntered { get; set; }
+    [Parameter]
+    public int Value { get; set; }
+}
+
+<div class="row" style="padding:inherit;">
+    <h3 style="padding-right:15px; padding-left:15px; margin-top:5px;"><i>@Text</i></h3>
+    <RadzenNumeric Value="@Value" Name="@Text" TValue="int" Min="@Min" Change=@(args => OnValueEntered.InvokeAsync(args)) />
+</div>

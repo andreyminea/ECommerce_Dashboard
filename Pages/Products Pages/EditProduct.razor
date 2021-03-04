@@ -1,0 +1,109 @@
+﻿@using ControlDashboard.Data
+
+@page "/editproduct/{id}"
+
+@inject Notifications notifications
+@inject NavigationManager navigationManager
+@inject APIManager api
+
+@code{
+    [Parameter] public string ID { get; set; }
+}
+<br />
+
+@if (product != null)
+{
+    <div class="row">
+        <div class="col-xl-6">
+            <RadzenSteps Change=@OnChange SelectedIndex="@currentStep">
+                <Steps>
+                    <RadzenStepsItem Text="General">
+                        <div class="box-outline">
+                            <General CurrentProduct="@product" />
+                        </div>
+                    </RadzenStepsItem>
+                    <RadzenStepsItem Text="Features">
+                        <div class="box-outline">
+                            <InputFeatures CurrentProduct="@product" />
+                        </div>
+                    </RadzenStepsItem>
+                    <RadzenStepsItem Text="Pictures">
+                        <div class="box-outline">
+                            <Pictures CurrentProduct="@product" />
+                        </div>
+                    </RadzenStepsItem>
+                    <RadzenStepsItem Text="Description">
+                        <div class="box-outline">
+                            <Description Text="@product.Description" CurrentProduct="@product" />
+                        </div>
+                    </RadzenStepsItem>
+                    <RadzenStepsItem Text="Submit">
+                        <div class="box-outline">
+                            <RadzenButton Text="Finish edit product" ButtonStyle="ButtonStyle.Info" Click="Send" />
+                        </div>
+                    </RadzenStepsItem>
+                </Steps>
+            </RadzenSteps>
+        </div>
+    </div>
+}
+
+@code {
+    Product product;
+    private int currentStep = 0;
+
+    protected async override void OnInitialized()
+    {
+        product = await api.Product.GetOne(ID);
+        this.StateHasChanged();
+    }
+
+    private void OnChange(int index)
+    {
+        if (currentStep == 0)
+        {
+            if (product.CheckGeneralInfo())
+            {
+                currentStep = index;
+            }
+            else
+            {
+                notifications.Error("Please fill all the informations");
+            }
+        }
+        else
+        {
+            if (index == 4)
+            {
+                if (product.CheckRest())
+                {
+                    currentStep = index;
+                }
+                else
+                {
+                    notifications.Error("Please enter pictures & a description");
+                }
+            }
+            else
+            {
+                currentStep = index;
+            }
+        }
+        this.StateHasChanged();
+    }
+
+    private async void Send()
+    {
+        var response = await api.Product.Modify(ID, product);
+
+        if(response)
+        {
+            notifications.Success("Product added in the database");
+            navigationManager.NavigateTo("viewproducts", true);
+        }
+        else
+        {
+            notifications.Error("Product was not added in the databse");
+        }
+    }
+}

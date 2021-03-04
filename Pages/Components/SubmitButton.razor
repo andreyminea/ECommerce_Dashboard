@@ -1,0 +1,36 @@
+﻿@code {
+    [Parameter]
+    public EventCallback<string> OnSubmit { get; set; }
+    [Parameter]
+    public string Text { get; set; }
+    [Parameter]
+    public string Icon { get; set; }
+    [Parameter]
+    public ButtonStyle Style { get; set; }
+}
+
+<div class="row">
+    <RadzenTextBox Value=@Text @oninput=@(args => OnChange(args.Value.ToString())) @ref="textBox"/>
+    <div style="width:10px;"/>
+    <RadzenButton Click=@(args => OnButtonPressed()) Icon=@Icon ButtonStyle="@Style" Style="margin-bottom: 20px; width: 40px" />
+</div>
+
+@code{    
+    RadzenTextBox textBox;
+
+    private void OnButtonPressed()
+    {
+        if(Text != null)
+            if(Text.Length>0)
+            {
+                OnSubmit.InvokeAsync(Text);
+                textBox.Value = "";
+                Text = "";
+            }
+    }
+
+    private void OnChange(string args)
+    {
+        Text = args;
+    }
+}

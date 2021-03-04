@@ -1,0 +1,113 @@
+﻿@inject Notifications notifications
+
+@code{
+    [Parameter]
+    public Product CurrentProduct { get; set; }
+    [Parameter]
+    public List<Category> Categories { get; set; }
+    private List<Subcategory> Subcategories;
+}
+
+<div class="grid-container">
+    <div>
+        <RadzenDropDown AllowClear="true" Value="CalculateCategory()" TValue="Category" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowFiltering="true"
+                        Placeholder="Select category..." TextProperty="CategoryName" Data=@Categories Change=@(args => OnChangeCategory((Category)args)) />
+    </div>
+    <div>
+        <RadzenDropDown AllowClear="true" Value="CalculateSubcategory()" TValue="Subcategory" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowFiltering="true"
+                        Placeholder="Select subcategory..." TextProperty="SubcategoryName" Data=@Subcategories Change=@(args => OnChangeSubcategory((Subcategory)args)) @ref="dropDownSubcateg" />
+    </div>
+</div>
+<br />
+<InfoTextBox Value="@CurrentProduct.Name" Text="Name" OnValueEntered="OnName" />
+<InfoTextBox Value="@CurrentProduct.ProductID" Text="ID" OnValueEntered="OnID" />
+<InfoTextBox Value="@CurrentProduct.Brand" Text="Brand" OnValueEntered="OnBrand" />
+<InfoNumberIntBox Value="@CurrentProduct.Stock" Text="Stock" Min="0" OnValueEntered="OnStock" />
+
+@code{
+    RadzenDropDown<Subcategory> dropDownSubcateg;
+
+    private Category CalculateCategory()
+    {
+        if(Categories != null && CurrentProduct.CategoryID != null)
+        {
+            var result = Categories.Find(x => CurrentProduct.CategoryID.Equals(x.DocID));
+
+            if(CurrentProduct.SubcategoryID != null)
+            {
+                Subcategories = result.Subcategories;
+            }
+            return result;
+        }
+        return null;
+    }
+
+    private Subcategory CalculateSubcategory()
+    {
+        if(Subcategories != null && CurrentProduct.SubcategoryID != null)
+            return Subcategories.Find(x => CurrentProduct.SubcategoryID.Equals(x.DocID));
+        return null;
+    }
+
+    private void OnChangeCategory(Category val)
+    {
+        if (val != null)
+        {
+            Subcategories = val.Subcategories;
+            CurrentProduct.CategoryID = val.DocID;
+        }
+        else
+        {
+            CurrentProduct.CategoryID = null;
+            Subcategories = null;
+        }
+        dropDownSubcateg.Reset();
+    }
+
+    private void OnChangeSubcategory(Subcategory val)
+    {
+        if (val != null)
+        {
+            CurrentProduct.SubcategoryID = val.DocID;
+        }
+        else
+        {
+            CurrentProduct.SubcategoryID = null;
+        }
+    }
+
+    private void OnName(string val)
+    {
+        if (String.IsNullOrWhiteSpace(val))
+        {
+            notifications.Warning("Name can't be empty");
+            return;
+        }
+        CurrentProduct.Name = val;
+    }
+
+    private void OnID(string val)
+    {
+        if (String.IsNullOrWhiteSpace(val))
+        {
+            notifications.Warning("ID can't be empty");
+            return;
+        }
+        CurrentProduct.ProductID = val;
+    }
+
+    private void OnBrand(string val)
+    {
+        if (String.IsNullOrWhiteSpace(val))
+        {
+            notifications.Warning("Brand can't be empty");
+            return;
+        }
+        CurrentProduct.Brand = val;
+    }
+
+    private void OnStock(int val)
+    {
+        CurrentProduct.Stock = val;
+    }
+}

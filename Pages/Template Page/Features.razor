@@ -1,0 +1,199 @@
+﻿@using ControlDashboard.Data
+@using ControlDashboard.Services
+
+@page "/features/{category}/{subcategory}"
+
+@inject Notifications notifications
+@inject APIManager api
+
+@code{
+    [Parameter] public string Category { get; set; }
+    [Parameter] public string Subcategory { get; set; }
+
+    private string prefix;
+}
+
+<div class="row">
+    <RadzenSelectBar @bind-Value="@value" TValue="string" Change="OnChange">
+        <Items>
+            @{
+                if (features != null)
+                {
+                    foreach (var item in features)
+                    {
+                        <RadzenSelectBarItem Text=@item.FeatureListName Value=@item.FeatureListName />
+                        }
+                    }
+                }
+        </Items>
+    </RadzenSelectBar>
+    <div style="width:50px" />
+    <SubmitButton Icon="keyboard_arrow_right" OnSubmit="OnAddList" />
+</div>
+<br />
+<div>
+    @{
+        if (value != null)
+        {
+            var feature = features.Find(x => x.FeatureListName.Equals(value));
+            if (feature != null)
+            {
+                if (feature.Fields != null)
+                {
+                    foreach (var item in feature.Fields)
+                    {
+                    <br />
+                    <div class="row" style="padding-left: 20px;">
+                        <TwoButtonsTextBox Text="@item" Icon1="done" Icon2="delete" Style1="ButtonStyle.Success" Style2="ButtonStyle.Warning" OnFirst="OnFeatureModified" OnSecond="OnDeleteFeature"/>
+                    </div>
+                    }
+                }
+            <br />
+            <div style="padding-left:10px;">
+                <SubmitButton Icon="add" OnSubmit="OnAddFeature" />
+                <RadzenButton Click=@(args => OnDeleteList()) Text="Delete" Icon="delete" ButtonStyle="ButtonStyle.Danger" Style="margin-bottom: 20px; width: 150px" />
+            </div>
+                }
+            }
+        }
+</div>
+
+@code{
+    string value;
+    List<FeatureList> features;
+
+    protected override async void OnInitialized()
+    {
+        prefix = Category + "/" + Subcategory;
+        features = await api.Feature.GetAll(prefix);
+
+        if (features == null)
+        {
+            features = new List<FeatureList>();
+        }
+        notifications.Success("Features for " + prefix + " loaded");
+        this.StateHasChanged();
+    }
+
+    private void OnChange(string selected)
+    {
+        Debug.WriteLine(value);
+    }
+
+    private FeatureList FindList(string listName)
+    {
+        if (features == null) return null;
+
+        return features.Find(x => x.FeatureListName.Equals(listName));
+    }
+
+    private async void OnDeleteFeature(string name)
+    {
+        FeatureList currentList = FindList(value);
+
+        if(currentList != null)
+        {
+            if(currentList.Fields.Remove(name))
+            {
+                var result = await api.Feature.ModifyList(prefix, currentList);
+                if(result)
+                    notifications.Success("Item has been deleted");
+            }
+            else
+                notifications.Error("Field was not found");
+        }
+        else
+            notifications.Error("Can't find current list");
+        Refresh();
+    }
+
+    private async void OnFeatureModified(string currentName, string initialName)
+    {
+        FeatureList currentList = FindList(value);
+
+        if (currentList != null)
+        {
+            var item = currentList.Fields.FindIndex(x => x.Equals(initialName));
+            if(item != -1)
+            {
+                currentList.Fields[item] = currentName;
+                var result = await api.Feature.ModifyList(prefix, currentList);
+                if (result)
+                    notifications.Success("Item has been modified");
+            }
+            else
+                notifications.Error("Field was not found");
+        }
+        else
+            notifications.Error("Can't find current list");
+        Refresh();
+    }
+
+    private async void OnDeleteList()
+    {
+        if (value != null)
+        {
+            if (value.Length > 0)
+            {
+                var result = await api.Feature.Delete(prefix, value);
+                if (result)
+                    notifications.Success("Item has been modified");
+                else
+                    notifications.Error("Item was not deleted");
+            }
+            else
+                notifications.Error("Item name is not valid");
+        }
+        else
+            notifications.Error("Item name is not valid");
+        Refresh();
+    }
+
+    private async void OnAddFeature(string name)
+    {
+        FeatureList currentList = FindList(value);
+
+        if (currentList != null)
+        {
+            if(currentList.Fields == null)
+            {
+                currentList.Fields = new List<string>();
+            }
+            currentList.Fields.Add(name);
+            var result = await api.Feature.ModifyList(prefix, currentList);
+            if (result)
+                notifications.Success("Item has been modified");
+            else
+                notifications.Error("Item was not added");
+        }
+        else
+            notifications.Error("Item couldn't be found");
+        Refresh();
+    }
+
+    private async void OnAddList(string name)
+    {
+        if (name != null)
+        {
+            if (name.Length > 0)
+            {
+                var result = await api.Feature.AddNewList(prefix, name);
+                if (result)
+                    notifications.Success("List has been added");
+                else
+                    notifications.Error("List " + name + " was not added");
+            }
+            else
+                notifications.Error("List name is not valid");
+        }
+        else
+            notifications.Error("List name is not valid");
+        Refresh();
+    }
+
+    private void Refresh()
+    {
+        OnInitialized();
+        this.StateHasChanged();
+    }
+}

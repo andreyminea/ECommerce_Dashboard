@@ -1,0 +1,47 @@
+﻿
+@inject Notifications notifications
+
+@code{
+    [Parameter]
+    public EventCallback OnChange { get; set; }
+    [Parameter]
+    public List<string> Pictures { get; set; }
+}
+
+<SubmitButton Text="" Icon="arrow_circle_up" Style="ButtonStyle.Success" OnSubmit="OnLinkAdded"/>
+
+@if(Pictures != null)
+{
+    for(int index = 0; index< Pictures.Count(); index++)
+    {
+        <LinkTextBox Text="@Pictures[index]" Index="@index" Icon="arrow_circle_up" Style="ButtonStyle.Secondary" OnSubmit="OnLinkChanged" OnDelete="OnDeleteItem"/>
+    }
+}
+<br/>
+
+@code {
+
+    private void OnDeleteItem(int index)
+    {
+        Pictures.RemoveAt(index);
+        OnChange.InvokeAsync(null);
+        this.StateHasChanged();
+    }
+
+    private void OnLinkAdded(string newLink)
+    {
+        Pictures.Add(newLink);
+        OnChange.InvokeAsync(null);
+        this.StateHasChanged();
+    }
+
+    private void OnLinkChanged(string newLink, int index)
+    {
+        if (!String.IsNullOrWhiteSpace(newLink))
+        {
+            Pictures[index] = newLink;
+            OnChange.InvokeAsync(null);
+            this.StateHasChanged();
+        }
+    }
+}

@@ -1,0 +1,23 @@
+﻿@using ControlDashboard.Pages.Products_Components.GeneralPage_Components
+
+@inject Notifications notifications
+@inject APIManager api
+
+@code{
+    [Parameter]
+    public Product CurrentProduct { get; set;}
+}
+
+<BasicInfo Categories="@categories" CurrentProduct="CurrentProduct" />
+<PriceInfo CurrentProduct="CurrentProduct" />
+
+
+@code {
+    List<Category> categories;
+
+    protected async override void OnInitialized()
+    {
+        categories = await api.Category.GetAll();
+        this.StateHasChanged();
+    }
+}

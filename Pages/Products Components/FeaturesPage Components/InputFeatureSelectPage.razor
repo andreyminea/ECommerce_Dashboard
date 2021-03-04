@@ -1,0 +1,55 @@
+﻿@code{
+    [Parameter]
+    public ProductFeatures ProductFeatures { get; set; }
+}
+
+<div class="row" style="margin-left:30px;">
+    <RadzenSelectBar @bind-Value="@value" TValue="string" Change="OnListChanged">
+        <Items>
+            @{
+                if (ProductFeatures != null)
+                {
+                    foreach (var item in ProductFeatures.List)
+                    {
+                        <RadzenSelectBarItem Text=@item.Name Value=@item.Name />
+                    }
+                }
+            }
+        </Items>
+    </RadzenSelectBar>
+</div>
+<br />
+<div style="margin-left:30px;">
+@{
+    if(flag == true)
+    {
+        var currentFeatures = ProductFeatures.List.Find(x => x.Name.Equals(value));
+        var currentDictionary = currentFeatures.Features;
+
+        foreach(var item in currentDictionary)
+        {
+            <ItemFeatureTextBox Display="@item.Value" Text="@item.Key" OnSubmit="OnSubmit"></ItemFeatureTextBox>
+        }
+    }   
+}
+</div>
+
+@code{
+    string value;
+    bool flag = false;
+
+    private void OnListChanged(string val)
+    {
+        value = val;
+        flag = true;
+        this.StateHasChanged();
+    }
+
+    private void OnSubmit(string key, string val)
+    {
+        var currentFeatures = ProductFeatures.List.Find(x => x.Name.Equals(value));
+        var currentDictionary = currentFeatures.Features;
+        currentDictionary[key] = val;
+        this.StateHasChanged();
+    }
+}

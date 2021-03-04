@@ -1,0 +1,32 @@
+﻿@using ControlDashboard.Pages.Products_Components.PictureComponents
+@code{
+    [Parameter]
+    public Product CurrentProduct { get; set; }
+}
+
+<div style="margin:25px;">
+    @if (CurrentProduct != null)
+    {
+        <UploadPicture Pictures="@CurrentProduct.Pictures" OnChange="OnRefreshDisplay" />
+        <DisplayPictures Urls="@CurrentProduct.Pictures" @ref="display" />
+    }
+</div>
+
+@code {
+    DisplayPictures display;
+
+    protected override void OnInitialized()
+    {
+        if(CurrentProduct!=null)
+        {
+            if (CurrentProduct.Pictures == null)
+                CurrentProduct.Pictures = new List<string>();
+            this.StateHasChanged();
+        }
+    }
+
+    public void OnRefreshDisplay()
+    {
+        display.ListChanged();
+    }
+}

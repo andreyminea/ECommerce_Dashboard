@@ -1,0 +1,111 @@
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\appsettings.Development.json
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\appsettings.json
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\ControlDashboard.exe
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\ControlDashboard.deps.json
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\ControlDashboard.runtimeconfig.json
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\ControlDashboard.runtimeconfig.dev.json
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\ControlDashboard.dll
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\ControlDashboard.pdb
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\ControlDashboard.Views.dll
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\ControlDashboard.Views.pdb
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.csprojAssemblyReference.cache
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.AssemblyInfoInputs.cache
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.AssemblyInfo.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.RazorComponent.input.cache
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\App.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Index.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Shared\MainLayout.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Shared\NavMenu.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\_Imports.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.TagHelpers.input.cache
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.TagHelpers.output.cache
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.RazorCoreGenerate.cache
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Error.cshtml.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\_Host.cshtml.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.RazorAssemblyInfo.cache
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.RazorAssemblyInfo.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.RazorTargetAssemblyInfo.cache
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.RazorTargetAssemblyInfo.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.Views.pdb
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\staticwebassets\ControlDashboard.StaticWebAssets.Manifest.cache
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\staticwebassets\ControlDashboard.StaticWebAssets.xml
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.dll
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.pdb
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.genruntimeconfig.cache
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.csproj.CopyComplete
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\ControlDashboard.StaticWebAssets.xml
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\Radzen.Blazor.dll
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\System.Linq.Dynamic.Core.dll
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\RestSharp.dll
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Components\Add.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Components\SubmitButton.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Components\TwoButtonsTextBox.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Template Page\Categories.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Template Page\Features.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Template Page\Subcategories.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Template Page\Templates.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Products Components\General.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Components\InfoTextBox.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Components\InfoNumberFloatBox.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Components\InfoNumberIntBox.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Components\InfoText.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Products Components\GeneralPage Components\BasicInfo.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Products Components\GeneralPage Components\PriceInfo.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Products Pages\AddProduct.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Products Components\InputFeatures.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Products Components\FeaturesPage Components\InputFeatureSelectPage.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Products Components\FeaturesPage Components\ItemFeatureTextBox.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Products Components\PictureComponents\DisplayPictures.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Products Components\PictureComponents\UploadPicture.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Products Components\Pictures.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Components\LinkTextBox.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Products Components\Description.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Products Pages\ViewProducts.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Products Pages\EditProduct.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\Microsoft.Azure.Management.SignalR.dll
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\Microsoft.Rest.ClientRuntime.dll
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\Microsoft.Rest.ClientRuntime.Azure.dll
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Connections.Client.dll
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\Microsoft.Azure.SignalR.Common.dll
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\Microsoft.Azure.SignalR.dll
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\Microsoft.Azure.SignalR.Protocols.dll
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+P:\Backend\ControlDashboard\ControlDashboard\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.csproj.CoreCompileInputs.cache
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.MvcApplicationPartsAssemblyInfo.cache
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\RazorDeclaration\ControlDashboard.dll
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\App.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Components\Add.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Components\InfoNumberFloatBox.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Components\InfoNumberIntBox.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Components\InfoText.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Components\InfoTextBox.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Components\LinkTextBox.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Components\SubmitButton.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Components\TwoButtonsTextBox.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Index.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Products Components\Description.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Products Components\FeaturesPage Components\InputFeatureSelectPage.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Products Components\FeaturesPage Components\ItemFeatureTextBox.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Products Components\General.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Products Components\GeneralPage Components\BasicInfo.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Products Components\GeneralPage Components\PriceInfo.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Products Components\InputFeatures.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Products Components\PictureComponents\DisplayPictures.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Products Components\PictureComponents\UploadPicture.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Products Components\Pictures.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Products Pages\AddProduct.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Products Pages\EditProduct.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Products Pages\ViewProducts.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Template Page\Categories.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Template Page\Features.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Template Page\Subcategories.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Pages\Template Page\Templates.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Shared\MainLayout.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\Shared\NavMenu.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\Razor\_Imports.razor.g.cs
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\ControlDashboard.RazorComponent.output.cache
+P:\Backend\ControlDashboard\ControlDashboard\obj\Debug\netcoreapp3.1\scopedcss\bundle\ControlDashboard.styles.css

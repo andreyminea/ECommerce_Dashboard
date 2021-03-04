@@ -1,0 +1,20 @@
+﻿@code{
+    [Parameter]
+    public List<string> Urls { get; set; }
+}
+
+@if (Urls != null)
+{
+    foreach (var link in Urls)
+    {
+        <div style="margin-top:20px;"/>
+        <RadzenImage Path="@link" Style="width:400px" />
+    }
+}
+
+@code {
+    public void ListChanged()
+    {
+        this.StateHasChanged();
+    }
+}

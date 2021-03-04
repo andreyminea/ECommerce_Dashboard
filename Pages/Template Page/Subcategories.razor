@@ -1,0 +1,129 @@
+﻿@using System.Diagnostics
+@using ControlDashboard.Data
+@using ControlDashboard.Services
+
+@inject Notifications notifications
+@inject APIManager api
+
+@code {
+    [Parameter]
+    public string CategoryName { get; set; }
+    [Parameter]
+    public EventCallback<string> OnClick { get; set; }
+    [Parameter]
+    public EventCallback OnModify { get; set; }
+
+    public void SetCategory(string name)
+    {
+        CategoryName = name;
+        Refresh();
+    }
+}
+
+<RadzenPanel AllowCollapse="false" Style="width: 400px; margin-bottom: 20px; height: 700px;">
+    <HeaderTemplate>
+        <Add Placeholder="Type new subcategory" OnAdd="AddSubcategory" @ref="add" />
+    </HeaderTemplate>
+    <ChildContent>
+        <RadzenDataList PageSize="1" WrapItems="true" AllowPaging="true" Data="@subcategories" TItem="Subcategory">
+            <Template Context="context">
+                <RadzenCard Style="width: 250px; margin-bottom: 20px; height: 300px;">
+                    <div>
+                        <h2 style="text-align: center">
+                            @context?.SubcategoryName
+                        </h2>
+                    </div>
+                    <br />
+                    <div>
+                        <RadzenTextBox Value=@context?.SubcategoryName Change=@(args => OnChange(@context?.SubcategoryName, args)) />
+                    </div>
+                    <br />
+                    <div>
+                        <h3>
+                            Category: @CategoryName
+                        </h3>
+                    </div>
+                    <div>
+                        <h3>
+                            Features: @context?.Features.Count
+                        </h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <RadzenButton Click=@(args => OnDelete(@context?.SubcategoryName)) Icon="delete" ButtonStyle="ButtonStyle.Danger" Style="margin-bottom: 20px; width: 80px" />
+                        </div>
+                        <div class="col-lg"></div>
+                        <div class="col-lg">
+                            <RadzenButton Click=@(args => OnClick.InvokeAsync(@context?.SubcategoryName)) Icon="keyboard_arrow_right" ButtonStyle="ButtonStyle.Info" Style="margin-bottom: 20px; width: 80px" />
+                        </div>
+                    </div>
+                </RadzenCard>
+            </Template>
+        </RadzenDataList>
+    </ChildContent>
+</RadzenPanel>
+
+@code{
+    List<Subcategory> subcategories;
+    Add add;
+
+    protected override async void OnInitialized()
+    {
+        subcategories = await api.Subcategory.GetAll(CategoryName);
+        notifications.Success("Subcategories for " + CategoryName + " loaded");
+        this.StateHasChanged();
+    }
+
+    private async void AddSubcategory(string name)
+    {
+        var result = await api.Subcategory.AddNew(CategoryName, name);
+
+        if (result)
+        {
+            await OnModify.InvokeAsync(null);
+            notifications.Success(name + " was added");
+            Refresh();
+        }
+        else
+            notifications.Error("New category was not added");
+        add.Reset();
+    }
+
+    private async void OnChange(string oldName, string newName)
+    {
+        if (newName != null)
+            if (newName.Length > 0)
+            {
+                var result = await api.Subcategory.Rename(CategoryName, oldName, newName);
+
+                if (result)
+                {
+                    notifications.Success(oldName + " was modified --> " + newName);
+                    Refresh();
+                }
+                else
+                    notifications.Error(oldName + " was not modified");
+            }
+    }
+
+    private async void OnDelete(string name)
+    {
+        var result = await api.Subcategory.Delete(CategoryName, name);
+
+        if (result)
+        {
+            await OnModify.InvokeAsync(null);
+            notifications.Success(name + " was deleted");
+            Refresh();
+        }
+        else
+            notifications.Error("Category was not deleted");
+
+    }
+
+    private void Refresh()
+    {
+        OnInitialized();
+        this.StateHasChanged();
+    }
+}

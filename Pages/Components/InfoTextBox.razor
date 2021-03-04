@@ -1,0 +1,13 @@
+﻿@code{
+    [Parameter]
+    public string Text { get; set; }
+    [Parameter]
+    public EventCallback<string> OnValueEntered { get; set; }
+    [Parameter]
+    public string Value { get; set; }
+}
+
+<div class="row" style="padding:inherit;">
+    <h3 style="padding-right:15px; padding-left:15px; margin-top:5px;"><i>@Text</i></h3>
+    <RadzenTextBox Value="@Value" Name="@Text" Change=@(args => OnValueEntered.InvokeAsync(args)) />
+</div>

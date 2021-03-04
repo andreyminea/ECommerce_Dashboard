@@ -1,0 +1,63 @@
+﻿@page "/templates"
+
+@inject NavigationManager navigationManager 
+
+<div class="row">
+    <div class="col-lg">
+        <Categories OnClick="SetCategory" Deleted="OnCategoryDeleted" @ref="categories">
+
+        </Categories>
+    </div>
+    <div class="col-lg" />
+    <div class="col-lg">
+        @{
+            if (showSubcategories)
+            {
+                <Subcategories CategoryName="@category" OnModify="OnModifiedSubcategories" OnClick="GoToFeatures" @ref="subcategories">
+
+                </Subcategories>
+            }
+        }
+    </div>
+</div>
+
+
+@code{
+    Subcategories subcategories;
+    Categories categories;
+    string category;
+    bool showSubcategories = false;
+
+    private void SetCategory(string categoryName)
+    {
+        showSubcategories = true;
+        category = categoryName;
+        this.StateHasChanged();
+
+        if (subcategories != null)
+            subcategories.SetCategory(categoryName);
+    }
+
+    private void OnCategoryDeleted(string categoryName)
+    {
+        if (category != null)
+        {
+            if (category.Equals(categoryName))
+            {
+                showSubcategories = false;
+                this.StateHasChanged();
+            }
+        }
+    }
+
+    private void OnModifiedSubcategories()
+    {
+        categories.Refresh();
+    }
+
+    private void GoToFeatures(string subcategory)
+    {
+        var uri = "features/" + category + "/" + subcategory;
+        navigationManager.NavigateTo(uri, true);
+    }
+}

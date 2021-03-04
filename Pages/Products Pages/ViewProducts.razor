@@ -1,0 +1,148 @@
+﻿@page "/viewproducts"
+
+@inject Notifications notifications
+@inject NavigationManager navigationManager
+@inject APIManager api
+
+@if (productViews == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <RadzenGrid Data="@productViews"
+                AllowFiltering="true" AllowPaging="true" AllowSorting="true" TItem="ProductView" ColumnWidth="200px">
+        <Columns>
+            <RadzenGridColumn TItem="ProductView" Property="ProductID" Title="ID" />
+            <RadzenGridColumn TItem="ProductView" Property="Name" Title="Name" />
+            <RadzenGridColumn TItem="ProductView" Property="Stock" Title="Stock" />
+            <RadzenGridColumn TItem="ProductView" Property="Category" Title="Category">
+                <FilterTemplate>
+                    <RadzenDropDown @bind-Value="@CategoryFilterValue" Change="CategoryFilterChanged" AllowClear="true" TextProperty="Text" ValueProperty="Value" Style="width:100%"
+                                    Data="@CategoriesList" />
+                </FilterTemplate>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="ProductView" Property="Subcategory" Title="Category">
+                <FilterTemplate>
+                    <RadzenDropDown @bind-Value="@SubcategoryFilterValue" Change="SubcategoryFilterChanged" AllowClear="true" TextProperty="Text" ValueProperty="Value" Style="width:100%"
+                                    Data="@SubcategoriesList" />
+                </FilterTemplate>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="ProductView" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="100px">
+                <Template Context="productView">
+                    <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Info" Size="ButtonSize.Medium" Click="@(args => EditProduct(productView.ProductID))" />
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="ProductView" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="100px">
+                <Template Context="productView">
+                    <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Medium" Click="@(args => DeleteProduct(productView.ProductID))" />
+                </Template>
+            </RadzenGridColumn>
+        </Columns>
+    </RadzenGrid>
+}
+
+@code{      
+    List<Category> categories;
+    List<ProductView> initialProductList;
+    List<ProductView> productViews;
+    List<string> CategoriesList;
+    string CategoryFilterValue;
+    List<string> SubcategoriesList;
+    string SubcategoryFilterValue;
+
+    protected async override void OnInitialized()
+    {
+        var products = await api.Product.GetAll();
+        categories = await api.Category.GetAll();
+        initialProductList = new List<ProductView>();
+        foreach(var item in products)
+        {
+            initialProductList.Add(new ProductView(item, categories));
+        }
+        productViews = initialProductList;
+        InitCategoriesList();
+        this.StateHasChanged();
+    }
+
+    private void EditProduct(string ID)
+    {
+        navigationManager.NavigateTo("editproduct/" + ID);
+    }
+
+    private async void DeleteProduct(string ID)
+    {
+        var result = await api.Product.Delete(ID);
+        if (result)
+        {
+            notifications.Success("Product deleted");
+            this.OnInitialized();
+        }
+        else
+        {
+            notifications.Error("Product was not deleted");
+        }
+    }
+
+    private void InitCategoriesList()
+    {
+        CategoriesList = new List<string>();
+
+        foreach(var item in categories)
+        {
+            CategoriesList.Add(item.CategoryName);
+        }
+    }
+
+    private void InitSubcategoriesList(string categoryName)
+    {
+        SubcategoriesList = new List<string>();
+        var categ = categories.Find(x => categoryName.Equals(x.CategoryName));
+
+        foreach(var item in categ.Subcategories)
+        {
+            SubcategoriesList.Add(item.SubcategoryName);
+        }
+    }
+
+    private void CategoryFilterChanged()
+    {
+        if(CategoryFilterValue == null)
+        {
+            SubcategoriesList = null;
+            productViews = initialProductList;
+        }
+        else
+        {
+            InitSubcategoriesList(CategoryFilterValue);
+            productViews = new List<ProductView>();
+
+            foreach(var item in initialProductList)
+            {
+                if (item.Category.Equals(CategoryFilterValue))
+                    productViews.Add(item);
+            }
+        }
+        this.StateHasChanged();
+    }
+
+    private void SubcategoryFilterChanged()
+    {
+        if(SubcategoryFilterValue == null)
+        {
+            CategoryFilterChanged();
+        }
+        else
+        {
+            productViews = new List<ProductView>();
+
+            foreach (var item in initialProductList)
+            {
+                if (item.Category.Equals(CategoryFilterValue)
+                        && item.Subcategory.Equals(SubcategoryFilterValue))
+                    productViews.Add(item);
+            }
+        }
+        this.StateHasChanged();
+    }
+}

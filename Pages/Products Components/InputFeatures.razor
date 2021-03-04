@@ -1,0 +1,66 @@
+﻿@using ControlDashboard.Pages.Products_Components.FeaturesPage_Components
+
+@inject Notifications notifications
+@inject APIManager api
+
+@code {
+    [Parameter]
+    public Product CurrentProduct { get; set; }
+}
+
+@if(okFlag)
+{
+    <InputFeatureSelectPage ProductFeatures="CurrentProduct.FeaturesLists"/>
+}
+
+@code{
+    List<Category> categories;
+    bool okFlag = false;
+    static string catID = "";
+    static string scatID = "";
+
+    protected async override void OnInitialized()
+    {
+        categories = await api.Category.GetAll();
+        GetFeatures();
+        okFlag = true;
+        this.StateHasChanged();
+    }
+
+    private void GetFeatures()
+    {
+        var category = categories.Find(x => x.DocID == CurrentProduct.CategoryID);
+        var subcategory = category.Subcategories.Find(x => x.DocID == CurrentProduct.SubcategoryID);
+
+        if(!(CurrentProduct.CategoryID.Equals(catID) && CurrentProduct.SubcategoryID.Equals(scatID)))
+        {
+            bool editFlag = false;
+            if (catID.Equals("") && CurrentProduct.FeaturesLists != null)
+                editFlag = true;
+
+            catID = CurrentProduct.CategoryID;
+            scatID = CurrentProduct.SubcategoryID;
+
+            if(!editFlag)
+                InitFeaturesLists(subcategory.Features);
+        }
+    }
+
+    private void InitFeaturesLists(List<FeatureList> features)
+    {
+        CurrentProduct.FeaturesLists = new ProductFeatures();
+        CurrentProduct.FeaturesLists.List = new List<ProductFeatureList>();
+        foreach (var item in features)
+        {
+            var newList = new ProductFeatureList();
+            newList.Name = item.FeatureListName;
+            newList.Features = new Dictionary<string, string>();
+
+            foreach (var elem in item.Fields)
+            {
+                newList.Features.Add(elem, "");
+            }
+            CurrentProduct.FeaturesLists.List.Add(newList);
+        }
+    }
+}

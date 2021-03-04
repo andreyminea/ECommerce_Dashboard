@@ -1,0 +1,14 @@
+﻿@code{
+    public delegate void CustomEventHandler(string key, string value);
+    [Parameter]
+    public CustomEventHandler OnSubmit { get; set; }
+    [Parameter]
+    public string Text { get; set; }
+    [Parameter]
+    public string Display { get; set; }
+}
+
+<div class="row" style="padding:inherit;">
+    <h3 style="padding-right:15px; padding-left:15px; margin-top:5px;"><i>@Text</i></h3>
+    <RadzenTextBox Value="@Display" Change=@(args => OnSubmit.Invoke(Text, args)) />
+</div>

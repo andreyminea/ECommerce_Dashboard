@@ -1,0 +1,115 @@
+﻿@using ControlDashboard.Data
+@using ControlDashboard.Services
+
+@inject Notifications notifications
+@inject APIManager api 
+
+@code{
+    [Parameter]
+    public EventCallback<string> OnClick { get; set; }
+
+    [Parameter]
+    public EventCallback<string> Deleted { get; set; }
+}
+
+<RadzenPanel AllowCollapse="false" Style="width: 400px; margin-bottom: 20px; height: 600px;">
+    <HeaderTemplate>
+        <Add Placeholder="Type new category" OnAdd="AddCategory" @ref="add"/>
+    </HeaderTemplate>
+    <ChildContent>
+        <RadzenDataList PageSize="1" WrapItems="true" AllowPaging="true" Data="@categories" TItem="Category">
+            <Template Context="context">
+                <RadzenCard Style="width: 250px; margin-bottom: 20px; height: 300px;">
+                    <div>
+                        <h2 style="text-align: center">
+                            @context?.CategoryName
+                        </h2>
+                    </div>
+                    <br />
+                    <div>
+                        <RadzenTextBox Value=@context?.CategoryName Change=@(args => OnChange(@context?.CategoryName, args)) />
+                    </div>
+                    <br /> <br />
+                    <div>
+                        <h3>
+                            Subcategories: @context?.Subcategories.Count
+                        </h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <RadzenButton Click=@(args => OnDelete(@context?.CategoryName)) Icon="delete" ButtonStyle="ButtonStyle.Danger" Style="margin-bottom: 20px; width: 80px" />
+                        </div>
+                        <div class="col-lg"></div>
+                        <div class="col-lg">
+                            <RadzenButton Click=@(args => OnClick.InvokeAsync(@context?.CategoryName)) Icon="keyboard_arrow_right" ButtonStyle="ButtonStyle.Info" Style="margin-bottom: 20px; width: 80px" />
+                        </div>
+                    </div>
+                </RadzenCard>
+            </Template>
+        </RadzenDataList>
+    </ChildContent>
+</RadzenPanel>
+
+@code{
+        List<Category> categories;
+        Add add;
+
+    protected override async void OnInitialized()
+    {
+        categories = await api.Category.GetAll();
+        notifications.Success("Categories loaded");
+        this.StateHasChanged();
+    }
+
+    private async void AddCategory(string name)
+    {
+        var result = await api.Category.AddNew(name);
+
+        if (result)
+        {
+            notifications.Success(name + " was added");
+            Refresh();
+        }
+        else
+            notifications.Error("New category was not added");
+        add.Reset();
+
+    }
+
+    private async void OnChange(string oldName, string newName)
+    {
+        if (newName != null)
+            if (newName.Length > 0)
+            {
+                var result = await api.Category.Rename(oldName, newName);
+
+                if (result)
+                {
+                    notifications.Success(oldName + " was modified --> " + newName);
+                    Refresh();
+                }
+                else
+                    notifications.Error(oldName + " was not modified");
+            }
+    }
+
+    private async void OnDelete(string name)
+    {
+        var result = await api.Category.Delete(name);
+
+        if (result)
+        {
+            notifications.Success(name + " was deleted");
+            await Deleted.InvokeAsync(name);
+            Refresh();
+        }
+        else
+            notifications.Error("Category was not deleted");
+    }
+
+    public void Refresh()
+    {
+        OnInitialized();
+        this.StateHasChanged();
+    }
+}

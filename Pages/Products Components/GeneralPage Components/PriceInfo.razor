@@ -1,0 +1,44 @@
+﻿@code {
+    [Parameter]
+    public Product CurrentProduct { get; set; }
+}
+
+<InfoNumberIntBox Value="@CurrentProduct.TVA" Text="TVA" Min="0" OnValueEntered="OnTVA" />
+<InfoNumberFloatBox Value="CalculatePriceNoTax()" Text="Price w/o TVA" Min="0" OnValueEntered="OnNoTaxPrice" />
+<InfoNumberFloatBox Value="@CurrentProduct.Price" Text="Price w/ TVA" Min="0" OnValueEntered="OnNormalPrice" />
+
+
+@code{
+
+    private float CalculatePriceNoTax()
+    {
+        float tva = CurrentProduct.TVA / 100f;
+        float result = CurrentProduct.Price / (tva + 1f);
+        return RoundTo2Decimals(result);
+    }
+
+    private void OnTVA(int val)
+    {
+        CurrentProduct.TVA = val;
+        OnNormalPrice(CurrentProduct.Price);
+    }
+
+    private void OnNoTaxPrice(float val)
+    {
+        float tva = CurrentProduct.TVA / 100f;
+        float result = val * tva + val;
+        CurrentProduct.Price = RoundTo2Decimals(result);
+        this.StateHasChanged();
+    }
+
+    private void OnNormalPrice(float val)
+    {
+        CurrentProduct.Price = val;
+        this.StateHasChanged();
+    }
+
+    private float RoundTo2Decimals(float val)
+    {
+        return (float)Math.Round(val * 100f) / 100f;
+    }
+}

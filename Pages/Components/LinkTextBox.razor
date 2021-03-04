@@ -1,0 +1,48 @@
+﻿@code {
+    public delegate void CustomEventHandler(string val, int index);
+    [Parameter]
+    public CustomEventHandler OnSubmit { get; set; }
+    [Parameter]
+    public EventCallback<int> OnDelete { get; set; }
+    [Parameter]
+    public string Text { get; set; }
+    [Parameter]
+    public string Icon { get; set; }
+    [Parameter]
+    public ButtonStyle Style { get; set; }
+    [Parameter]
+    public int Index { get; set; }
+}
+
+<div class="row">
+    <RadzenTextBox Value=@Text @oninput=@(args => OnChange(args.Value.ToString())) @ref="textBox" />
+    <div style="width:10px;" />
+    <RadzenButton Click=@(args => OnModifyPressed()) Icon=@Icon ButtonStyle="@Style" Style="margin-bottom: 20px; width: 40px" />
+    <div style="width:10px" />
+    <RadzenButton Click=@(args => OnDeletePressed()) Icon="clear" ButtonStyle="ButtonStyle.Danger" Style="margin-bottom: 20px; width: 40px" />
+</div>
+
+@code{
+    RadzenTextBox textBox;
+
+    private void OnDeletePressed()
+    {
+        OnDelete.InvokeAsync(Index);
+    }
+
+    private void OnModifyPressed()
+    {
+        if (Text != null)
+            if (Text.Length > 0)
+            {
+                OnSubmit.Invoke(Text, Index);
+                textBox.Value = "";
+                Text = "";
+            }
+    }
+
+    private void OnChange(string args)
+    {
+        Text = args;
+    }
+}

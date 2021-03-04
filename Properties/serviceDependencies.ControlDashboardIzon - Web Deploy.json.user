@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "signalr1": {
+      "restored": true,
+      "restoreTime": "2020-11-26T23:21:24.1144552Z"
+    }
+  },
+  "parameters": {
+    "signalr1.resourceGroupName": {
+      "Type": "resourceGroup",
+      "Value": "BackEndRGroup"
+    },
+    "signalr1.subscriptionId": {
+      "Type": "subscription",
+      "Value": "cfe4a23d-a71d-475a-840b-53020624e5ce"
+    }
+  }
+}
